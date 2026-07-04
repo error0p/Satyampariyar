@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Content Ecosystem — Patil Group · Satyam Pariyar</title>
+  <meta name="description" content="Standardizing and designing digital communications for Patil Group — including the 5S Manufacturing Excellence campaign and corporate welcome systems.">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230D0D0D'/><text x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-family='system-ui' font-weight='700' font-size='14' fill='%23F5F4F0'>SP</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+    /* Custom style for Digital Content Ecosystem */
+    .cs-hero__img-inner.cs-img--digital-cs {
+      background: linear-gradient(135deg, #120900 0%, #291500 40%, #402100 70%, #170d00 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cs-hero__img-inner.cs-img--digital-cs::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 40% 60%, rgba(255, 140, 0, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(255, 90, 0, 0.1) 0%, transparent 50%);
+    }
+
+    /* Slider styling for 5S Campaign */
+    .slider-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0d0d0d;
+    }
+
+    .slides-wrapper {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 100%;
+    }
+
+    .slide-item {
+      min-width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* Slider controls */
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    .slider-nav:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .slider-nav--prev { left: 16px; }
+    .slider-nav--next { right: 16px; }
+
+    .slider-nav svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: var(--sp-6);
+    }
+
+    .slider-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .slider-dot.is-active {
+      background: #ff7b00;
+      transform: scale(1.2);
+    }
+
+    /* Single showcase styles */
+    .showcase-block {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: var(--sp-8);
+      margin-top: var(--sp-12);
+      overflow: hidden;
+    }
+
+    .showcase-image-wrap {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto var(--sp-8);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .showcase-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .showcase-info {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .showcase-title {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-bottom: var(--sp-2);
+      color: var(--text-primary);
+    }
+
+    .showcase-desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .slider-nav {
+        width: 38px;
+        height: 38px;
+      }
+      .slider-nav--prev { left: 8px; }
+      .slider-nav--next { right: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+  ========================================================== -->
+  <nav class="nav is-scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">Satyam Pariyar</a>
+      <div class="nav__links">
+        <a href="../work.html" class="nav__link is-active">Work</a>
+        <a href="../about.html" class="nav__link">About</a>
+        <a href="mailto:satyampariyar275@gmail.com" class="nav__cta">Say hello →</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-toggle__icon">
+            <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- =========================================================
+       HERO
+  ========================================================== -->
+  <div class="cs-hero">
+    <div class="cs-hero__img">
+      <div class="cs-hero__img-inner cs-img--digital-cs" id="cs-parallax">
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+          <div style="font-size: clamp(2.5rem, 8vw, 6rem); font-weight: 800; letter-spacing: -0.05em; color: rgba(255, 120, 0, 0.15); text-transform: uppercase;">
+            Digital Communications
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =========================================================
+       INTRO
+  ========================================================== -->
+  <div class="cs-intro container">
+    <div class="cs-intro__inner">
+      <div>
+        <p class="t-label" style="margin-bottom: var(--sp-5)" data-animate>Content Design · 2025–26</p>
+        <h1 class="cs-intro__heading" data-animate data-delay="1">
+          Digital Content Ecosystem
+        </h1>
+        <p class="cs-intro__sub" data-animate data-delay="2">
+          Standardizing and elevating Patil Group’s digital voice. A collection of cohesive visual systems, from technical campaigns explaining corporate excellence to welcoming frameworks for new hires.
+        </p>
+      </div>
+
+      <aside class="cs-meta" data-animate data-delay="3">
+        <div class="cs-meta__item">
+          <p class="cs-meta__label">Client</p>
+          <p class="cs-meta__value">Patil Group</p>
+        </div>
+        <div class="cs-meta__item">
+          <p class="cs-meta__label">Role</p>
+          <p class="cs-meta__value">Creative Lead &amp; Brand Designer</p>
+        </div>
+        <div class="cs-meta__item">
+          <p class="cs-meta__label">Deliverables</p>
+          <p class="cs-meta__value">Campaign Systems · Template Design · Digital Strategy</p>
+        </div>
+        <div class="cs-meta__item">
+          <p class="cs-meta__label">Year</p>
+          <p class="cs-meta__value">2025–26 (Ongoing)</p>
+        </div>
+      </</aside>
+    </div>
+  </div>
+
+
+  <div class="divider"></div>
+
+
+  <!-- =========================================================
+       SECTION 1 — THE 5S CAMPAIGN
+  ========================================================== -->
+  <div class="cs-section container">
+    <p class="cs-section__label" data-animate>Campaign 01</p>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--sp-16); align-items:start">
+      <h2 class="cs-section__heading" data-animate data-delay="1">
+        5S: The Foundation of World-Class Manufacturing.
+      </h2>
+      <div class="cs-section__body" data-animate data-delay="2">
+        <p>
+          Lean manufacturing and workplace organization (5S) are crucial operational philosophies, but they are notoriously difficult to communicate dynamically on corporate feeds. The brief was to translate the technical Japanese principles (Sort, Set, Shine, Standardize, Sustain) into a compelling LinkedIn carousel.
+        </p>
+        <p>
+          The approach was to marry industrial aesthetics with strict design systems. Using high-contrast, black-and-white photography of real factory floors and workers, accented by a striking brand orange, each slide acts as a chapter in an engaging visual manual.
+        </p>
+      </div>
+    </div>
+
+    <!-- 5S Slide Gallery Carousel -->
+    <div style="margin-top: var(--sp-12);" data-animate>
+      <div class="slider-container">
+        <button class="slider-nav slider-nav--prev" id="sliderPrev" aria-label="Previous slide">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+        </button>
+        <button class="slider-nav slider-nav--next" id="sliderNext" aria-label="Next slide">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+        </button>
+        <div class="slides-wrapper" id="slidesWrapper">
+          <div class="slide-item"><img src="../assets/img/5s/slide 1.png" alt="5S Slide 1: The First Step Towards Manufacturing Excellence"></div>
+          <div class="slide-item"><img src="../assets/img/5s/slide 2.png" alt="5S Slide 2: 5S The Foundation of World-Class Manufacturing"></div>
+          <div class="slide-item"><img src="../assets/img/5s/slide 3.png" alt="5S Slide 3: Sort What Matters. Place It Where It Belongs."></div>
+          <div class="slide-item"><img src="../assets/img/5s/slide 4.png" alt="5S Slide 4: Cleaning Is Inspection in Disguise"></div>
+          <div class="slide-item"><img src="../assets/img/5s/slide 5.png" alt="5S Slide 5: Standards Without Discipline Are Just Rules on Paper"></div>
+          <div class="slide-item"><img src="../assets/img/5s/slide 6.png" alt="5S Slide 6: The Business Impact of 5S"></div>
+          <div class="slide-item"><img src="../assets/img/5s/slide 7.png" alt="5S Slide 7: At Patil Group, 5S Is Where Excellence Begins"></div>
+        </div>
+      </div>
+      <div class="slider-dots" id="sliderDots"></div>
+    </div>
+  </div>
+
+
+  <!-- =========================================================
+       SECTION 2 — THE WELCOME SERIES
+  ========================================================== -->
+  <div class="cs-section container">
+    <p class="cs-section__label" data-animate>Campaign 02</p>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--sp-16); align-items:start">
+      <h2 class="cs-section__heading" data-animate data-delay="1">
+        Welcome Aboard: A Human-First Announcement.
+      </h2>
+      <div class="cs-section__body" data-animate data-delay="2">
+        <p>
+          Corporate welcoming posts are often cold, layout-heavy templates. To support Patil Group's rapid hiring cadence, I designed a reusable "Welcome Aboard" framework that puts the people first while preserving brand equity.
+        </p>
+        <p>
+          The layout uses warm cream backdrops and striking orange/red arched portrait frames. This provides an elegant editorial feel rather than a rigid corporate block, letting new employees across diverse divisions (Precast, Procurement, SCM, RMBD) feel celebrated in a premium unified visual system.
+        </p>
+      </div>
+    </div>
+
+    <!-- Welcome Board Image Showcase -->
+    <div class="showcase-block" data-animate>
+      <div class="showcase-image-wrap">
+        <img src="../assets/img/welcome-aboard/welcome aboard june.png" alt="Welcome Aboard June New Hires template featuring Siddharth Sharma, Abdul Azeem Patel, Prashant Kumar Jha, Ritija Adhikari, Karteek P, and Akashay P Shanmughan">
+      </div>
+      <div class="showcase-info">
+        <h3 class="showcase-title">Welcome Aboard Campaign System</h3>
+        <p class="showcase-desc">A repeatable, batch-friendly card grid built to scale. The design merges warm-toned editorial layouts with modern portrait geometry, setting an industrial standard for employee onboarding.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="divider"></div>
+
+
+  <!-- =========================================================
+       NEXT PROJECT NAV
+  ========================================================== -->
+  <div class="cs-nav container">
+    <div class="cs-nav__inner">
+      <a href="meet-the-team.html" class="cs-nav__link">
+        <span class="cs-nav__dir">← Previous Project</span>
+        <span class="cs-nav__title">Meet The Team</span>
+      </a>
+      <a href="mojo-pizza.html" class="cs-nav__link cs-nav__link--next">
+        <span class="cs-nav__dir">Next Project →</span>
+        <span class="cs-nav__title">Mojo Pizza Campaign</span>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="footer">
+    <div class="footer__container container">
+      <div class="footer__grid">
+        
+        <!-- Left: Last Updated -->
+        <div class="footer__col footer__col--left">
+          <span class="footer__label">LAST UPDATED</span>
+          <span class="footer__value">June 29th, 2026</span>
+        </div>
+        
+        <!-- Center: Note Card & Social Tiles -->
+        <div class="footer__col footer__col--center">
+          <div class="footer__mascot">
+            <svg class="mascot-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="mascot-body" d="M40 160 C40 80, 60 40, 100 40 C140 40, 160 80, 160 160 C160 170, 150 180, 140 180 C130 180, 120 170, 110 175 C100 180, 90 170, 80 175 C70 180, 60 170, 40 160 Z" fill="var(--bg-card)" stroke="var(--text-primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="80" cy="90" r="16" stroke="var(--text-primary)" stroke-width="3.5" fill="var(--bg)" fill-opacity="0.1"/>
+              <circle cx="120" cy="90" r="16" stroke="var(--text-primary)" stroke-width="3.5" fill="var(--bg)" fill-opacity="0.1"/>
+              <path d="M96 90 H104" stroke="var(--text-primary)" stroke-width="3.5"/>
+              <path d="M64 90 H54" stroke="var(--text-primary)" stroke-width="3.5"/>
+              <path d="M136 90 H146" stroke="var(--text-primary)" stroke-width="3.5"/>
+              <circle class="mascot-eye" cx="80" cy="90" r="4.5" fill="var(--text-primary)"/>
+              <circle class="mascot-eye" cx="120" cy="90" r="4.5" fill="var(--text-primary)"/>
+              <circle cx="58" cy="102" r="5" fill="#ff6b8b" fill-opacity="0.55"/>
+              <circle cx="142" cy="102" r="5" fill="#ff6b8b" fill-opacity="0.55"/>
+              <path d="M92 108 Q100 115 108 108" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>
+              <path class="mascot-tongue" d="M95 110 C95 119, 105 119, 105 110 Z" fill="#ff6b8b" stroke="var(--text-primary)" stroke-width="2.5"/>
+              <g class="mascot-hand">
+                <path d="M148 135 Q160 128 165 118" stroke="var(--text-primary)" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="165" cy="112" r="7" fill="var(--bg-card)" stroke="var(--text-primary)" stroke-width="3.5"/>
+                <path d="M162 106 V93" stroke="var(--text-primary)" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M168 106 V90" stroke="var(--text-primary)" stroke-width="3.5" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+          <div class="footer__card">
+            <span class="footer__card-tag">A NOTE FROM SATYAM</span>
+            <p class="footer__card-line">Hi, thank you for being here &lt;3</p>
+            <p class="footer__card-line">Design, to me, is care and intentionality.</p>
+            <p class="footer__card-line">If something here stayed with you,</p>
+            <p class="footer__card-line">say <a href="mailto:satyampariyar275@gmail.com" class="footer__card-email">satyampariyar275@gmail.com</a></p>
+          </div>
+          
+          <div class="footer__tiles">
+            <a href="mailto:satyampariyar275@gmail.com" class="footer__tile footer__tile--mail" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com/in/satyam-pariyar-77336b21a" target="_blank" rel="noopener" class="footer__tile footer__tile--linkedin" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/404_error.op/" target="_blank" rel="noopener" class="footer__tile footer__tile--instagram" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="https://www.behance.net/mrscribe007" target="_blank" rel="noopener" class="footer__tile footer__tile--behance" aria-label="Behance">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-12h4.5a3 3 0 0 1 0 6a3 3 0 0 1 0 6h-4.5" />
+                <path d="M3 12l4.5 0" />
+                <path d="M14 13h7a3.5 3.5 0 0 0 -7 0v2a3.5 3.5 0 0 0 6.64 1" />
+                <path d="M16 6l3 0" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Right: Currently -->
+        <div class="footer__col footer__col--right">
+          <span class="footer__label">CURRENTLY</span>
+          <span class="footer__value" id="currently-time">☀️ Bangalore</span>
+        </div>
+        
+      </div>
+      
+      <div class="footer__bottom">
+        <span class="footer__copyright">© 2026 Satyam Pariyar · 17.3850° N, 78.4867° E</span>
+        
+        <div class="footer__badge">
+          <img src="../assets/img/profile.jpg" alt="Satyam Pariyar" class="footer__badge-avatar">
+          <div class="footer__badge-content">
+            <span class="footer__badge-name">Satyam Pariyar</span>
+            <span class="footer__badge-status">Available for work</span>
+          </div>
+          <span class="footer__badge-dot"></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Custom Slider Logic for 5S slides
+    document.addEventListener('DOMContentLoaded', () => {
+      const wrapper = document.getElementById('slidesWrapper');
+      const slides = wrapper.querySelectorAll('.slide-item');
+      const prevBtn = document.getElementById('sliderPrev');
+      const nextBtn = document.getElementById('sliderNext');
+      const dotsContainer = document.getElementById('sliderDots');
+      
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+
+      // Create dots
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('slider-dot');
+        if (i === 0) dot.classList.add('is-active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+
+      const dots = dotsContainer.querySelectorAll('.slider-dot');
+
+      function updateSlider() {
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot, idx) => {
+          if (idx === currentIndex) {
+            dot.classList.add('is-active');
+          } else {
+            dot.classList.remove('is-active');
+          }
+        });
+      }
+
+      function goToSlide(index) {
+        currentIndex = index;
+        updateSlider();
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      }
+
+      nextBtn.addEventListener('click', nextSlide);
+      prevBtn.addEventListener('click', prevSlide);
+
+      // Swipe support
+      let startX = 0;
+      wrapper.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+      });
+
+      wrapper.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

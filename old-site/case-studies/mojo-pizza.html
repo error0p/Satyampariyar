@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mojo Pizza — Campaign Design · Satyam Pariyar</title>
+  <meta name="description" content="Vibrant social campaign for Mojo Pizza — designing high-energy, visual content for the More Mojo series.">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230D0D0D'/><text x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-family='system-ui' font-weight='700' font-size='14' fill='%23F5F4F0'>SP</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+    /* Mojo Pizza specific branding overrides */
+    .cs-hero__img-inner.cs-img--mojo-cs {
+      background: linear-gradient(135deg, #2b0c03 0%, #611b03 40%, #a63107 70%, #451201 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cs-hero__img-inner.cs-img--mojo-cs::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 60%, rgba(255, 90, 0, 0.22) 0%, transparent 60%),
+        radial-gradient(ellipse at 75% 25%, rgba(255, 60, 0, 0.15) 0%, transparent 50%);
+    }
+
+    /* Mojo showcase styles */
+    .mojo-showcase {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: var(--sp-8);
+      margin-top: var(--sp-12);
+      overflow: hidden;
+    }
+
+    .mojo-image-wrap {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto var(--sp-8);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mojo-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .mojo-info {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .mojo-title {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-bottom: var(--sp-2);
+      color: var(--text-primary);
+    }
+
+    .mojo-desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+  ========================================================== -->
+  <nav class="nav is-scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">Satyam Pariyar</a>
+      <div class="nav__links">
+        <a href="../work.html" class="nav__link is-active">Work</a>
+        <a href="../about.html" class="nav__link">About</a>
+        <a href="mailto:satyampariyar275@gmail.com" class="nav__cta">Say hello →</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-toggle__icon">
+            <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- =========================================================
+       HERO
+  ========================================================== -->
+  <div class="cs-hero">
+    <div class="cs-hero__img">
+      <div class="cs-hero__img-inner cs-img--mojo-cs" id="cs-parallax">
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+          <div style="font-size: clamp(3rem, 10vw, 8rem); font-weight: 900; letter-spacing: -0.05em; color: rgba(255, 60, 0, 0.15); text-transform: uppercase;">
+            Mojo Pizza
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =========================================================
+       INTRO
+  ========================================================== -->
+  <div class="cs-intro container">
+    <div class="cs-intro__inner">
+      <div>
+        <p class="t-label" style="margin-bottom: var(--sp-5)" data-animate>Campaign Design · 2026</p>
+        <h1 class="cs-intro__heading" data-animate data-delay="1">
+          Mojo Pizza
+        </h1>
+        <p class="cs-intro__sub" data-animate data-delay="2">
+          An energetic, visually dominant campaign designed for Mojo Pizza’s signature "More Mojo" series. Highlighting fresh ingredients with dynamic typography and splashing visuals.
+        </p>
+      </div>
+
+      <aside class="cs-meta" data-animate data-delay="3">
+        <div class="cs-meta__item">
+          <p class="cs-meta__label">Client</p>
+          <p class="cs-meta__value">Mojo Pizza</p>
+        </div>
+        <div class="cs-meta__item">
+          <p class="cs-meta__label">Role</p>
+          <p class="cs-meta__value">Creative Lead &amp; Designer</p>
+        </div>
+        <div class="cs-meta__item">
+          <p class="cs-meta__label">Deliverables</p>
+          <p class="cs-meta__value">Campaign Creative · Typographic Identity · Social Content</p>
+        </div>
+        <div class="cs-meta__item">
+          <p class="cs-meta__label">Year</p>
+          <p class="cs-meta__value">2026</p>
+        </div>
+      </</aside>
+    </div>
+  </div>
+
+
+  <div class="divider"></div>
+
+
+  <!-- =========================================================
+       SECTION 1 — THE CREATIVE
+  ========================================================== -->
+  <div class="cs-section container">
+    <p class="cs-section__label" data-animate>The Concept</p>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--sp-16); align-items:start">
+      <h2 class="cs-section__heading" data-animate data-delay="1">
+        High-energy typography meets splash-style food photography.
+      </h2>
+      <div class="cs-section__body" data-animate data-delay="2">
+        <p>
+          Consumer food campaigns need to trigger instant cravings. For Mojo Pizza, the challenge was to create a visual that breaks through busy social timelines. I paired bold, high-contrast, hand-carved styled typography ("MORE MOJO") with clean, high-speed action photography of pizza ingredients (green capsicums, sweet corn) floating around a hot, cheesy pizza slice.
+        </p>
+        <p>
+          The rich orange/red gradient background coordinates with the brand's identity while enhancing the warmth and flavor appeal of the food itself. A brush stroke label anchors the specific flavor variant: "Capsicum &amp; Corn".
+        </p>
+      </div>
+    </div>
+
+    <!-- Mojo Pizza Image Showcase -->
+    <div class="mojo-showcase" data-animate>
+      <div class="mojo-image-wrap">
+        <img src="../assets/img/mojo/mojo-pizza.png" alt="Mojo Pizza More Mojo Campaign featuring Capsicum & Corn Pizza Slice with flying toppings">
+      </div>
+      <div class="mojo-info">
+        <h3 class="mojo-title">"More Mojo" Campaign Visual</h3>
+        <p class="mojo-desc">Combining high-speed photography with customized commercial lettering. Built as a social media hero visual to drive digital click-through rates.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="divider"></div>
+
+
+  <!-- =========================================================
+       NEXT PROJECT NAV
+  ========================================================== -->
+  <div class="cs-nav container">
+    <div class="cs-nav__inner">
+      <a href="digital-content.html" class="cs-nav__link">
+        <span class="cs-nav__dir">← Previous Project</span>
+        <span class="cs-nav__title">Digital Content Ecosystem</span>
+      </a>
+      <a href="../work.html" class="cs-nav__link cs-nav__link--next">
+        <span class="cs-nav__dir">All Work →</span>
+        <span class="cs-nav__title">Back to portfolio</span>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="footer">
+    <div class="footer__container container">
+      <div class="footer__grid">
+        
+        <!-- Left: Last Updated -->
+        <div class="footer__col footer__col--left">
+          <span class="footer__label">LAST UPDATED</span>
+          <span class="footer__value">June 29th, 2026</span>
+        </div>
+        
+        <!-- Center: Note Card & Social Tiles -->
+        <div class="footer__col footer__col--center">
+          <div class="footer__mascot">
+            <svg class="mascot-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="mascot-body" d="M40 160 C40 80, 60 40, 100 40 C140 40, 160 80, 160 160 C160 170, 150 180, 140 180 C130 180, 120 170, 110 175 C100 180, 90 170, 80 175 C70 180, 60 170, 40 160 Z" fill="var(--bg-card)" stroke="var(--text-primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="80" cy="90" r="16" stroke="var(--text-primary)" stroke-width="3.5" fill="var(--bg)" fill-opacity="0.1"/>
+              <circle cx="120" cy="90" r="16" stroke="var(--text-primary)" stroke-width="3.5" fill="var(--bg)" fill-opacity="0.1"/>
+              <path d="M96 90 H104" stroke="var(--text-primary)" stroke-width="3.5"/>
+              <path d="M64 90 H54" stroke="var(--text-primary)" stroke-width="3.5"/>
+              <path d="M136 90 H146" stroke="var(--text-primary)" stroke-width="3.5"/>
+              <circle class="mascot-eye" cx="80" cy="90" r="4.5" fill="var(--text-primary)"/>
+              <circle class="mascot-eye" cx="120" cy="90" r="4.5" fill="var(--text-primary)"/>
+              <circle cx="58" cy="102" r="5" fill="#ff6b8b" fill-opacity="0.55"/>
+              <circle cx="142" cy="102" r="5" fill="#ff6b8b" fill-opacity="0.55"/>
+              <path d="M92 108 Q100 115 108 108" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>
+              <path class="mascot-tongue" d="M95 110 C95 119, 105 119, 105 110 Z" fill="#ff6b8b" stroke="var(--text-primary)" stroke-width="2.5"/>
+              <g class="mascot-hand">
+                <path d="M148 135 Q160 128 165 118" stroke="var(--text-primary)" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="165" cy="112" r="7" fill="var(--bg-card)" stroke="var(--text-primary)" stroke-width="3.5"/>
+                <path d="M162 106 V93" stroke="var(--text-primary)" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M168 106 V90" stroke="var(--text-primary)" stroke-width="3.5" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+          <div class="footer__card">
+            <span class="footer__card-tag">A NOTE FROM SATYAM</span>
+            <p class="footer__card-line">Hi, thank you for being here &lt;3</p>
+            <p class="footer__card-line">Design, to me, is care and intentionality.</p>
+            <p class="footer__card-line">If something here stayed with you,</p>
+            <p class="footer__card-line">say <a href="mailto:satyampariyar275@gmail.com" class="footer__card-email">satyampariyar275@gmail.com</a></p>
+          </div>
+          
+          <div class="footer__tiles">
+            <a href="mailto:satyampariyar275@gmail.com" class="footer__tile footer__tile--mail" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com/in/satyam-pariyar-77336b21a" target="_blank" rel="noopener" class="footer__tile footer__tile--linkedin" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/404_error.op/" target="_blank" rel="noopener" class="footer__tile footer__tile--instagram" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="https://www.behance.net/mrscribe007" target="_blank" rel="noopener" class="footer__tile footer__tile--behance" aria-label="Behance">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-12h4.5a3 3 0 0 1 0 6a3 3 0 0 1 0 6h-4.5" />
+                <path d="M3 12l4.5 0" />
+                <path d="M14 13h7a3.5 3.5 0 0 0 -7 0v2a3.5 3.5 0 0 0 6.64 1" />
+                <path d="M16 6l3 0" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Right: Currently -->
+        <div class="footer__col footer__col--right">
+          <span class="footer__label">CURRENTLY</span>
+          <span class="footer__value" id="currently-time">☀️ Bangalore</span>
+        </div>
+        
+      </div>
+      
+      <div class="footer__bottom">
+        <span class="footer__copyright">© 2026 Satyam Pariyar · 17.3850° N, 78.4867° E</span>
+        
+        <div class="footer__badge">
+          <img src="../assets/img/profile.jpg" alt="Satyam Pariyar" class="footer__badge-avatar">
+          <div class="footer__badge-content">
+            <span class="footer__badge-name">Satyam Pariyar</span>
+            <span class="footer__badge-status">Available for work</span>
+          </div>
+          <span class="footer__badge-dot"></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

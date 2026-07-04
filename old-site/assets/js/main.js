@@ -1,0 +1,418 @@
+/* ============================================================
+   THEME TOGGLE — dark / light with localStorage persistence
+   ============================================================ */
+
+(function initTheme() {
+  const html    = document.documentElement;
+  const btn     = document.getElementById('themeToggle');
+  const STORAGE = 'sp-theme';
+
+  // Apply saved preference (default: dark)
+  const saved = localStorage.getItem(STORAGE) || 'dark';
+  html.setAttribute('data-theme', saved);
+
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next    = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem(STORAGE, next);
+  });
+})();
+
+
+/* ============================================================
+   NAVIGATION — scroll-aware state
+   ============================================================ */
+
+(function initNav() {
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+
+  // Pages with is-scrolled forced on by default (non-homepage) don't need JS scroll handling
+  if (nav.classList.contains('is-scrolled')) return;
+
+  const THRESHOLD = 40;
+
+  function update() {
+    if (window.scrollY > THRESHOLD) {
+      nav.classList.add('is-scrolled');
+    } else {
+      nav.classList.remove('is-scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+
+/* ============================================================
+   SCROLL ANIMATIONS — Intersection Observer
+   ============================================================ */
+
+(function initScrollAnimations() {
+  const elements = document.querySelectorAll('[data-animate]');
+  if (!elements.length) return;
+
+  // Respect reduced-motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    elements.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target); // Animate once
+        }
+      });
+    },
+    {
+      threshold: 0.08,
+      rootMargin: '0px 0px -48px 0px',
+    }
+  );
+
+  elements.forEach(el => observer.observe(el));
+})();
+
+
+/* ============================================================
+   PROJECT FILTER — Work page
+   ============================================================ */
+
+(function initFilter() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards      = document.querySelectorAll('.project-card[data-category]');
+  if (!filterBtns.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      // Show/hide cards with a brief fade
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+
+        if (match) {
+          card.classList.remove('is-hidden');
+          // Re-trigger entrance animation
+          card.classList.remove('is-visible');
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => card.classList.add('is-visible'));
+          });
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+    });
+  });
+})();
+
+
+/* ============================================================
+   PARALLAX — Case study hero
+   ============================================================ */
+
+(function initParallax() {
+  const el = document.getElementById('cs-parallax');
+  if (!el) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  function onScroll() {
+    const scrollY = window.scrollY;
+    // Move the background layer at 30% of scroll speed for depth
+    el.style.transform = `translateY(${scrollY * 0.28}px)`;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+
+/* ============================================================
+   SMOOTH HOVER — project grid sibling dimming
+   (CSS :has() handles modern browsers; this is a JS fallback)
+   ============================================================ */
+
+(function initGridHover() {
+  const grid = document.querySelector('.project-grid');
+  if (!grid) return;
+
+  // CSS :has() handles this in modern browsers — skip if supported
+  try {
+    document.querySelector('.project-grid:has(.project-card:hover)');
+    return; // :has() works, CSS handles it
+  } catch (_) {
+    // Fallback for older browsers
+  }
+
+  const cards = grid.querySelectorAll('.project-card');
+
+  grid.addEventListener('mouseover', e => {
+    const card = e.target.closest('.project-card');
+    if (!card) return;
+    cards.forEach(c => {
+      c.style.opacity = c === card ? '1' : '0.5';
+    });
+  });
+
+  grid.addEventListener('mouseleave', () => {
+    cards.forEach(c => { c.style.opacity = ''; });
+  });
+})();
+
+
+/* ============================================================
+   HERO TEXT — stagger on load (homepage only)
+   ============================================================ */
+
+(function initHeroEntrance() {
+  // Elements with data-animate are handled by IntersectionObserver,
+  // but hero elements start in viewport — trigger them on load
+  const heroElements = document.querySelectorAll('.hero [data-animate]');
+  if (!heroElements.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    heroElements.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Small initial delay so the page paint completes first
+  setTimeout(() => {
+    heroElements.forEach(el => el.classList.add('is-visible'));
+  }, 80);
+})();
+
+
+/* ============================================================
+   ACTIVE NAV LINK — highlight based on current page
+   ============================================================ */
+
+(function initActiveNav() {
+  const links = document.querySelectorAll('.nav__link');
+  const path  = window.location.pathname;
+
+  links.forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    // Normalise: strip leading "../" for case study pages
+    const normalHref = href.replace(/^\.\.\//, '/');
+    const normalPath = path.replace(/\/index\.html$/, '/');
+
+    if (normalPath.includes(normalHref.replace('.html', '')) && normalHref !== '/') {
+      link.classList.add('is-active');
+    }
+  });
+})();
+
+
+/* ============================================================
+   MARQUEE — pause on reduced motion
+   ============================================================ */
+
+(function initMarquee() {
+  const track = document.querySelector('.marquee__track');
+  if (!track) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    track.style.animationPlayState = 'paused';
+  }
+})();
+
+
+/* ============================================================
+   TAGLINE SCROLL-FILL — GSAP ScrollTrigger
+   Muted hero tagline gradually fills in as the user scrolls.
+   Animates background-position on each character so the bright
+   half of an oversized linear-gradient slides up into view.
+   ============================================================ */
+
+function initTaglineFill() {
+  var tagline = document.querySelector('.tagline-fill');
+  if (!tagline) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Always split with the manual splitter — no plugin dependency.
+  var chars = manualSplitChars(tagline);
+
+  // If GSAP / ScrollTrigger aren't available yet, fill everything immediately.
+  if (!window.gsap || !window.ScrollTrigger) {
+    chars.forEach(function(c) { c.style.backgroundPosition = '0% 100%'; });
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.fromTo(chars,
+    { backgroundPosition: '0% 0%' },     // muted half showing
+    {
+      backgroundPosition: '0% 100%',     // bright half showing
+      stagger: { each: 0.03, from: 'start' },
+      ease: 'none',
+      scrollTrigger: {
+        trigger: tagline,
+        start: 'top 90%',
+        end: 'top 30%',
+        scrub: 0.6,
+      },
+    }
+  );
+}
+
+function manualSplitChars(el) {
+  var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+  var textNodes = [];
+  var node;
+  while ((node = walker.nextNode())) textNodes.push(node);
+
+  var collected = [];
+  textNodes.forEach(function(tn) {
+    var text = tn.textContent;
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.className = 'split-char';
+      span.textContent = text[i];
+      frag.appendChild(span);
+      collected.push(span);
+    }
+    tn.parentNode.replaceChild(frag, tn);
+  });
+  return collected;
+}
+
+// Run after GSAP scripts have loaded
+if (document.readyState === 'complete') {
+  initTaglineFill();
+} else {
+  window.addEventListener('load', initTaglineFill);
+}
+
+
+
+/* ============================================================
+   STICKY FEATURE — sticky media swap as user scrolls info blocks
+   ============================================================ */
+
+(function initStickyFeature() {
+  var root = document.querySelector('.sticky-feature');
+  if (!root) return;
+
+  var items      = root.querySelectorAll('.js-sticky-feature__item');
+  var mediaItems = root.querySelectorAll('.sticky-feature__media-item');
+  if (!items.length || !mediaItems.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: show all items full opacity, default media stays
+    items.forEach(function(item) { item.classList.add('is-active'); });
+    return;
+  }
+
+  function setActive(featureId) {
+    mediaItems.forEach(function(m) {
+      m.classList.toggle('is-active', m.dataset.feature === featureId);
+    });
+    items.forEach(function(it) {
+      it.classList.toggle('is-active', it.dataset.feature === featureId);
+    });
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    // Find the entry with the highest intersection ratio that's currently intersecting
+    var best = null;
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      if (!best || entry.intersectionRatio > best.intersectionRatio) best = entry;
+    });
+
+    if (best) {
+      setActive(best.target.dataset.feature);
+    } else {
+      // None in the trigger band right now — pick the closest item to viewport center
+      var viewportCenter = window.innerHeight / 2;
+      var closest = null;
+      var closestDist = Infinity;
+      items.forEach(function(it) {
+        var rect = it.getBoundingClientRect();
+        var center = rect.top + rect.height / 2;
+        var dist = Math.abs(center - viewportCenter);
+        if (dist < closestDist) { closestDist = dist; closest = it; }
+      });
+      if (closest) setActive(closest.dataset.feature);
+    }
+  }, {
+    // Trigger band in the middle 40% of the viewport
+    rootMargin: '-30% 0px -30% 0px',
+    threshold: [0, 0.25, 0.5, 0.75, 1],
+  });
+
+  items.forEach(function(item) { observer.observe(item); });
+})();
+
+
+/* ============================================================
+   DYNAMIC CLOCK — Bangalore Timezone
+   Updates the clock in the footer to show current time in India Standard Time
+   ============================================================ */
+
+(function initDynamicClock() {
+  const clockEl = document.getElementById('currently-time');
+  if (!clockEl) return;
+
+  function updateClock() {
+    const options = {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    };
+    
+    try {
+      const formatter = new Intl.DateTimeFormat('en-US', options);
+      const parts = formatter.formatToParts(new Date());
+      const hourPart = parts.find(p => p.type === 'hour');
+      const minutePart = parts.find(p => p.type === 'minute');
+      const dayPeriodPart = parts.find(p => p.type === 'dayPeriod');
+      
+      const hourVal = hourPart ? hourPart.value : '12';
+      const minVal = minutePart ? minutePart.value : '00';
+      const periodVal = dayPeriodPart ? dayPeriodPart.value.toUpperCase() : 'AM';
+      
+      const hourNum = parseInt(hourVal, 10);
+      const isPM = periodVal.includes('PM');
+      
+      // Determine emoji based on time: Sun (6 AM - 5:59 PM), Moon (6 PM - 5:59 AM)
+      let isDay = true;
+      if (isPM) {
+        if (hourNum !== 12 && hourNum >= 6) { // 6 PM to 11 PM
+          isDay = false;
+        }
+      } else {
+        if (hourNum === 12 || hourNum < 6) { // 12 AM to 5 AM
+          isDay = false;
+        }
+      }
+      
+      const emoji = isDay ? '☀️' : '🌙';
+      clockEl.innerHTML = `${emoji} Bangalore, ${hourVal}:${minVal} ${periodVal}`;
+    } catch (e) {
+      clockEl.innerHTML = `☀️ Bangalore`;
+    }
+  }
+
+  updateClock();
+  setInterval(updateClock, 60000); // update every minute
+})();
