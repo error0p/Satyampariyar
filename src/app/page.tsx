@@ -123,15 +123,21 @@ export default function Home() {
               src="/assets/img/layer3.png"
               alt="Sunset mountains landscape"
               fill
-              className="object-cover object-center opacity-90 dark:opacity-60 transition-opacity duration-300"
+              className="object-cover object-center opacity-85 dark:opacity-30 transition-opacity duration-300"
               priority
             />
             {/* Theme-aware overlays for contrast */}
             <div className="absolute inset-0 bg-gradient-to-b from-background/45 via-background/15 to-background/65" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_90%,transparent_0%,var(--color-background)_85%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,var(--color-background)_90%)]" />
+            {/* Center vignette to pop the text */}
+            <div className="absolute inset-0 bg-black/10 dark:bg-black/35" />
           </div>
 
-          <div className="container-custom flex-grow flex flex-col justify-center items-center text-center gap-12 z-10 max-w-4xl mx-auto relative min-h-[70vh]">
+          {/* Top spacer */}
+          <div className="h-4" />
+
+          {/* Middle: Content Stack */}
+          <div className="container-custom z-10 max-w-4xl mx-auto flex flex-col items-center justify-center gap-8 md:gap-10 my-auto">
             {/* Status indicators */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -153,7 +159,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="t-hero text-foreground select-none text-center"
+                className="t-hero text-foreground select-none text-center tracking-tight leading-none"
               >
                 Satyam
                 <br />
@@ -161,26 +167,43 @@ export default function Home() {
               </motion.h1>
             </div>
 
-            {/* Bottom info */}
-            <div className="flex flex-col items-center gap-6 mt-4 max-w-xl">
+            {/* Subtitle / Tagline & CTA Buttons */}
+            <div className="flex flex-col items-center gap-8 max-w-xl">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="text-lg md:text-xl font-medium text-secondary leading-relaxed"
+                className="text-lg md:text-xl font-medium text-secondary leading-relaxed text-center"
               >
                 Brand &amp; Marketing Designer.<br />
                 <span className="text-foreground italic">Brands built to last.</span><br />
                 Campaigns built to land.
               </motion.p>
-            </div>
 
-            {/* Scroll explorer (centered bottom) */}
+              {/* Minimal CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-wrap items-center justify-center gap-4 mt-2"
+              >
+                <Button href="/work" variant="primary" className="px-6 py-3 text-xs tracking-wider">
+                  View Work
+                </Button>
+                <Button href="/contact" variant="secondary" className="px-6 py-3 text-xs tracking-wider bg-background/50 backdrop-blur-xs">
+                  Say Hello
+                </Button>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Bottom: Scroll explorer (natural flow) */}
+          <div className="container-custom z-10 flex flex-col items-center mt-8">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="absolute -bottom-10 md:bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 font-mono text-[9px] text-secondary uppercase tracking-widest"
+              className="flex flex-col items-center gap-3 font-mono text-[9px] text-secondary uppercase tracking-widest"
             >
               <span>Scroll to explore</span>
               <div className="w-[1px] h-8 bg-secondary/35"></div>
