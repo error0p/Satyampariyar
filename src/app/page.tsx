@@ -117,19 +117,18 @@ export default function Home() {
       <main className="flex-grow pt-24">
         {/* Hero Section */}
         <section className="relative min-h-[90vh] flex flex-col justify-between py-12 md:py-20 bg-background overflow-hidden border-b border-card-border">
-          {/* Background Layer with gradients to prevent sharp cuts */}
+          {/* Background Layer (Full Bleed) */}
           <div className="absolute inset-0 z-0 pointer-events-none">
             <Image
               src="/assets/img/layer3.png"
               alt="Sunset mountains landscape"
               fill
-              className="object-cover object-right-bottom opacity-50 dark:opacity-25"
+              className="object-cover object-center opacity-90 dark:opacity-60 transition-opacity duration-300"
               priority
             />
-            {/* Blending gradients */}
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/15" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_90%,transparent_10%,var(--color-background)_75%)]" />
+            {/* Theme-aware overlays for contrast */}
+            <div className="absolute inset-0 bg-gradient-to-b from-background/45 via-background/15 to-background/65" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_90%,transparent_0%,var(--color-background)_85%)]" />
           </div>
 
           <div className="container-custom flex-grow flex flex-col justify-center gap-12 z-10">
