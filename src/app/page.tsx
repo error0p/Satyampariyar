@@ -123,14 +123,14 @@ export default function Home() {
               src="/assets/img/layer3.png"
               alt="Sunset mountains landscape"
               fill
-              className="object-cover object-center opacity-85 dark:opacity-30 transition-opacity duration-300"
+              className="object-cover object-center opacity-95 dark:opacity-55 transition-opacity duration-300"
               priority
             />
             {/* Theme-aware overlays for contrast */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background/45 via-background/15 to-background/65" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,var(--color-background)_90%)]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/10 to-background/55" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,var(--color-background)_95%)]" />
             {/* Center vignette to pop the text */}
-            <div className="absolute inset-0 bg-black/10 dark:bg-black/35" />
+            <div className="absolute inset-0 bg-black/5 dark:bg-black/20" />
           </div>
 
           {/* Top spacer */}
