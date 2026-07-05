@@ -131,13 +131,13 @@ export default function Home() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_90%,transparent_0%,var(--color-background)_85%)]" />
           </div>
 
-          <div className="container-custom flex-grow flex flex-col justify-center gap-12 z-10">
+          <div className="container-custom flex-grow flex flex-col justify-center items-center text-center gap-12 z-10 max-w-4xl mx-auto relative min-h-[70vh]">
             {/* Status indicators */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-wrap items-center gap-3 text-xs font-mono uppercase tracking-widest text-secondary"
+              className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono uppercase tracking-widest text-secondary"
             >
               <div className="flex items-center gap-2 bg-card border border-card-border px-3 py-1.5 rounded-full">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
@@ -148,12 +148,12 @@ export default function Home() {
             </motion.div>
 
             {/* Giant Title */}
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <motion.h1
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="t-hero text-foreground select-none"
+                className="t-hero text-foreground select-none text-center"
               >
                 Satyam
                 <br />
@@ -162,28 +162,29 @@ export default function Home() {
             </div>
 
             {/* Bottom info */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mt-4">
+            <div className="flex flex-col items-center gap-6 mt-4 max-w-xl">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="text-lg md:text-xl font-medium max-w-md text-secondary leading-relaxed"
+                className="text-lg md:text-xl font-medium text-secondary leading-relaxed"
               >
                 Brand &amp; Marketing Designer.<br />
                 <span className="text-foreground italic">Brands built to last.</span><br />
                 Campaigns built to land.
               </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="hidden md:flex items-center gap-3 font-mono text-[10px] text-secondary uppercase tracking-widest"
-              >
-                <span>Scroll to explore</span>
-                <div className="w-12 h-[1px] bg-secondary/30"></div>
-              </motion.div>
             </div>
+
+            {/* Scroll explorer (centered bottom) */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="absolute -bottom-10 md:bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 font-mono text-[9px] text-secondary uppercase tracking-widest"
+            >
+              <span>Scroll to explore</span>
+              <div className="w-[1px] h-8 bg-secondary/35"></div>
+            </motion.div>
           </div>
         </section>
 
